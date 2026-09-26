@@ -1,0 +1,14 @@
+# Configurações locais e credenciais
+.env
+.env.*
+config/database.local.php
+
+# Scripts de banco usados apenas no ambiente local
+database/install.sql
+database/seed.sql
+
+# Arquivos temporários do editor e do sistema
+.vscode/
+*.log
+Thumbs.db
+.DS_Store
