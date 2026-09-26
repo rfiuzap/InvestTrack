@@ -63,11 +63,11 @@ D:\xampp\htdocs\InvestTrack Finance
    database\install.sql
    ```
 
-4. Execute a importação. O script cria automaticamente o banco `investtrack` e suas tabelas.
+4. Execute a importação. O script cria automaticamente o banco `bando_local_RF` e suas tabelas.
 5. A configuração padrão do projeto utiliza:
 
    - servidor: `localhost`;
-   - banco: `investtrack`;
+   - banco: `bando_local_RF`;
    - usuário: `root`;
    - senha: vazia, como é comum na instalação padrão do XAMPP.
 
@@ -82,13 +82,13 @@ Para publicar ou demonstrar o projeto sem levar os registros do banco local, use
 - dez ações de teste;
 - dez operações de compra para cada carteira, totalizando vinte operações.
 
-Esse arquivo não apaga nem modifica o banco local `investtrack`. Depois de importá-lo, altere temporariamente o nome do banco em `config/database.php`:
+Esse arquivo não apaga nem modifica o banco local `bando_local_RF`. Depois de importá-lo, altere temporariamente o nome do banco em `config/database.php`:
 
 ```php
 $dbname = 'investtrack_github';
 ```
 
-Para continuar usando o banco local, mantenha o valor original `investtrack`. O arquivo `database/github.sql` contém apenas dados fictícios para demonstração e testes.
+Para continuar usando o banco local, mantenha o valor original `bando_local_RF`. O arquivo `database/github.sql` contém apenas dados fictícios para demonstração e testes.
 
 ## Acessando a aplicação
 
@@ -110,7 +110,7 @@ Se você colocar o projeto em outra pasta, o endereço deve refletir esse caminh
 
 O InvestTrack Finance é uma ferramenta local de organização e acompanhamento. Ele não substitui orientação profissional de investimentos, não executa ordens em corretoras e não deve ser tratado como fonte única para decisões financeiras.
 
-Como os dados ficam na instalação local, faça cópias de segurança periódicas do banco `investtrack` pelo phpMyAdmin, especialmente antes de reinstalar o XAMPP ou mover o projeto para outro computador.
+Como os dados ficam na instalação local, faça cópias de segurança periódicas do banco `bando_local_RF` pelo phpMyAdmin, especialmente antes de reinstalar o XAMPP ou mover o projeto para outro computador.
 
 ## Versão do projeto
 
