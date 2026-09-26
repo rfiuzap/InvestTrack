@@ -60,7 +60,7 @@ D:\xampp\htdocs\InvestTrack Finance
 3. Selecione o arquivo:
 
    ```text
-   database\install.sql
+   o script SQL de estrutura do banco local
    ```
 
 4. Execute a importação para criar as tabelas do banco local.
