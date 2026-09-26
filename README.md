@@ -74,7 +74,7 @@ D:\xampp\htdocs\InvestTrack Finance
 
 ### Banco limpo para o GitHub
 
-Para publicar ou demonstrar o projeto sem levar os registros do ambiente local, use o arquivo `database/github.sql`. Ele cria um banco separado chamado `banco_producao`, com:
+Para publicar ou demonstrar o projeto sem levar os registros do ambiente local, use o arquivo `database/banco_producao.sql`. Ele cria um banco separado chamado `banco_producao`, com:
 
 - as tabelas necessárias para a aplicação;
 - duas carteiras de demonstração: João e Maria;
@@ -87,7 +87,7 @@ Esse arquivo não apaga nem modifica os dados do ambiente local. Depois de impor
 $dbname = 'banco_producao';
 ```
 
-O arquivo `database/github.sql` contém apenas dados fictícios para demonstração e testes. Os scripts e dados do ambiente local não fazem parte da publicação.
+O arquivo `database/banco_producao.sql` contém apenas dados fictícios para demonstração e testes. Os scripts e dados do ambiente local não fazem parte da publicação.
 
 ## Acessando a aplicação
 
