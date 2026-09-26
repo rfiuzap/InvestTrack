@@ -64,14 +64,14 @@ D:\xampp\htdocs\InvestTrack Finance
    ```
 
 4. Execute a importação. O script cria automaticamente o banco `bando_local_RF` e suas tabelas.
-5. A configuração padrão do projeto utiliza:
+5. Para usar o banco local, configure `config/database.php` com:
 
    - servidor: `localhost`;
    - banco: `bando_local_RF`;
    - usuário: `root`;
    - senha: vazia, como é comum na instalação padrão do XAMPP.
 
-   Essas informações estão em `config/database.php`. Caso a instalação do MySQL use outra senha ou porta, ajuste esse arquivo antes de acessar a aplicação.
+   Essas informações estão em `config/database.php`. A versão publicada no GitHub vem apontada para `investtrack_github`; troque somente o valor de `$dbname` para `bando_local_RF` quando quiser usar seus dados locais. Caso a instalação do MySQL use outra senha ou porta, ajuste esse arquivo antes de acessar a aplicação.
 
 ### Banco limpo para o GitHub
 
