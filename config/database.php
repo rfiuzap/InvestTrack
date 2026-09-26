@@ -9,7 +9,7 @@ final class Database
     {
         if (self::$instance === null) {
             $host = 'localhost';
-            $dbname = 'investtrack_github';
+            $dbname = 'banco_producao';
             $user = 'root';
             $pass = '';
             $charset = 'utf8mb4';

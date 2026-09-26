@@ -63,32 +63,31 @@ D:\xampp\htdocs\InvestTrack Finance
    database\install.sql
    ```
 
-4. Execute a importação. O script cria automaticamente o banco `bando_local_RF` e suas tabelas.
-5. Para usar o banco local, configure `config/database.php` com:
+4. Execute a importação para criar as tabelas do banco local.
+5. Para uma instalação local, configure `config/database.php` com os dados do seu banco privado:
 
    - servidor: `localhost`;
-   - banco: `bando_local_RF`;
    - usuário: `root`;
    - senha: vazia, como é comum na instalação padrão do XAMPP.
 
-   Essas informações estão em `config/database.php`. A versão publicada no GitHub vem apontada para `investtrack_github`; troque somente o valor de `$dbname` para `bando_local_RF` quando quiser usar seus dados locais. Caso a instalação do MySQL use outra senha ou porta, ajuste esse arquivo antes de acessar a aplicação.
+   A versão publicada no GitHub vem apontada para `banco_producao`. O banco local deve permanecer fora do repositório e nunca ser enviado ao GitHub. Caso a instalação do MySQL use outra senha ou porta, ajuste esse arquivo antes de acessar a aplicação.
 
 ### Banco limpo para o GitHub
 
-Para publicar ou demonstrar o projeto sem levar os registros do banco local, use o arquivo `database/github.sql`. Ele cria um banco separado chamado `investtrack_github`, com:
+Para publicar ou demonstrar o projeto sem levar os registros do ambiente local, use o arquivo `database/github.sql`. Ele cria um banco separado chamado `banco_producao`, com:
 
 - as tabelas necessárias para a aplicação;
 - duas carteiras de demonstração: João e Maria;
 - dez ações de teste;
 - dez operações de compra para cada carteira, totalizando vinte operações.
 
-Esse arquivo não apaga nem modifica o banco local `bando_local_RF`. Depois de importá-lo, altere temporariamente o nome do banco em `config/database.php`:
+Esse arquivo não apaga nem modifica os dados do ambiente local. Depois de importá-lo, configure `config/database.php` para usar:
 
 ```php
-$dbname = 'investtrack_github';
+$dbname = 'banco_producao';
 ```
 
-Para continuar usando o banco local, mantenha o valor original `bando_local_RF`. O arquivo `database/github.sql` contém apenas dados fictícios para demonstração e testes.
+O arquivo `database/github.sql` contém apenas dados fictícios para demonstração e testes. Os scripts e dados do ambiente local não fazem parte da publicação.
 
 ## Acessando a aplicação
 
@@ -110,7 +109,7 @@ Se você colocar o projeto em outra pasta, o endereço deve refletir esse caminh
 
 O InvestTrack Finance é uma ferramenta local de organização e acompanhamento. Ele não substitui orientação profissional de investimentos, não executa ordens em corretoras e não deve ser tratado como fonte única para decisões financeiras.
 
-Como os dados ficam na instalação local, faça cópias de segurança periódicas do banco `bando_local_RF` pelo phpMyAdmin, especialmente antes de reinstalar o XAMPP ou mover o projeto para outro computador.
+Como os dados ficam na instalação local, faça cópias de segurança periódicas pelo phpMyAdmin, especialmente antes de reinstalar o XAMPP ou mover o projeto para outro computador.
 
 ## Versão do projeto
 

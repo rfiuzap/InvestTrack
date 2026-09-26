@@ -1,9 +1,9 @@
 -- InvestTrack Finance - Banco limpo para a versão publicada no GitHub
 -- Este arquivo não contém nenhum registro do banco local.
--- Use-o em uma instalação separada para preservar o banco bando_local_RF local.
+-- Use-o em uma instalação separada para preservar os dados locais.
 
-CREATE DATABASE IF NOT EXISTS investtrack_github CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE investtrack_github;
+CREATE DATABASE IF NOT EXISTS banco_producao CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE banco_producao;
 
 CREATE TABLE IF NOT EXISTS carteiras (
     id INT AUTO_INCREMENT PRIMARY KEY,
