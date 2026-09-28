@@ -237,11 +237,11 @@ class PortfolioService
 
     public function evolucaoMensal(?int $carteiraId = null): array
     {
-        $sql = "SELECT DATE_FORMAT(data_operacao, '%Y-%m') AS mes,
+        $sql = "SELECT strftime('%Y-%m', data_operacao) AS mes,
                        SUM(CASE WHEN tipo = 'COMPRA' THEN (quantidade * preco_unitario + taxas)
                                 ELSE -(quantidade * preco_unitario - taxas) END) AS delta
                 FROM transacoes";
-        $sqlProventos = "SELECT DATE_FORMAT(data_pagamento, '%Y-%m') AS mes, SUM(valor) AS total FROM proventos";
+        $sqlProventos = "SELECT strftime('%Y-%m', data_pagamento) AS mes, SUM(valor) AS total FROM proventos";
         $params = [];
         if ($carteiraId !== null) {
             $sql .= ' WHERE carteira_id = :carteira_id';

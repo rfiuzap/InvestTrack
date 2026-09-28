@@ -68,7 +68,7 @@ class Asset
     public function updateQuote(int $id, float $preco): bool
     {
         $stmt = $this->db->prepare(
-            'UPDATE ativos SET cotacao_atual = :preco, cotacao_atualizada_em = NOW() WHERE id = :id'
+            "UPDATE ativos SET cotacao_atual = :preco, cotacao_atualizada_em = datetime('now', 'localtime') WHERE id = :id"
         );
         return $stmt->execute(['preco' => $preco, 'id' => $id]);
     }

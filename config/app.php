@@ -1,12 +1,28 @@
 <?php
 declare(strict_types=1);
 
-error_reporting(E_ALL);
-ini_set('display_errors', '1');
-date_default_timezone_set('America/Sao_Paulo');
-
 define('BASE_PATH', dirname(__DIR__));
-define('BASE_URL', '/Projetos/InvestTrack%20Finance');
+
+// Ambiente (local, demo ou producao) lido do .env da instalação; sem .env = local.
+$envFile = BASE_PATH . '/.env';
+$appEnv = 'local';
+if (is_file($envFile) && preg_match('/^\s*APP_ENV\s*=\s*"?(local|demo|producao)"?\s*$/m', (string)file_get_contents($envFile), $envMatch)) {
+    $appEnv = $envMatch[1];
+}
+define('APP_ENV', $appEnv);
+
+error_reporting(E_ALL);
+ini_set('display_errors', APP_ENV === 'local' ? '1' : '0');
+date_default_timezone_set('America/Sao_Paulo');
+$documentRoot = realpath($_SERVER['DOCUMENT_ROOT'] ?? '');
+$applicationPath = realpath(BASE_PATH);
+if ($documentRoot !== false && $applicationPath !== false && str_starts_with(strtolower($applicationPath), strtolower($documentRoot))) {
+    $relativePath = substr($applicationPath, strlen($documentRoot));
+    $relativePath = trim(str_replace(DIRECTORY_SEPARATOR, '/', $relativePath), '/');
+    define('BASE_URL', $relativePath === '' ? '' : '/' . $relativePath);
+} else {
+    define('BASE_URL', '/InvestTrack-Finance');
+}
 $versionFile = BASE_PATH . '/VERSION';
 define('APP_VERSION', is_file($versionFile) ? trim((string)file_get_contents($versionFile)) : '0.0.0');
 

@@ -1,76 +1,20 @@
--- InvestTrack Finance - Banco limpo para a versão publicada no GitHub
--- Este arquivo não contém nenhum registro do banco local.
--- Use-o em uma instalação separada para preservar os dados locais.
+-- Seed demonstrativo aplicado pelo aplicativo quando banco_producao.sqlite esta vazio.
 
-CREATE DATABASE IF NOT EXISTS banco_producao CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE banco_producao;
-
-CREATE TABLE IF NOT EXISTS carteiras (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    nome VARCHAR(60) NOT NULL UNIQUE,
-    criado_em DATETIME DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-CREATE TABLE IF NOT EXISTS ativos (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    ticker VARCHAR(10) NOT NULL UNIQUE,
-    nome VARCHAR(150) NOT NULL,
-    tipo ENUM('ACAO','FII','ETF','BDR','OUTRO') NOT NULL DEFAULT 'ACAO',
-    setor VARCHAR(100) DEFAULT NULL,
-    cotacao_atual DECIMAL(14,4) NOT NULL DEFAULT 0,
-    cotacao_atualizada_em DATETIME DEFAULT NULL,
-    criado_em DATETIME DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-CREATE TABLE IF NOT EXISTS transacoes (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    ativo_id INT NOT NULL,
-    carteira_id INT NOT NULL,
-    tipo ENUM('COMPRA','VENDA') NOT NULL,
-    quantidade INT NOT NULL,
-    preco_unitario DECIMAL(18,6) NOT NULL,
-    taxas DECIMAL(14,4) NOT NULL DEFAULT 0,
-    data_operacao DATE NOT NULL,
-    observacao VARCHAR(255) DEFAULT NULL,
-    criado_em DATETIME DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT fk_transacoes_ativo FOREIGN KEY (ativo_id) REFERENCES ativos(id) ON DELETE CASCADE,
-    CONSTRAINT fk_transacoes_carteira FOREIGN KEY (carteira_id) REFERENCES carteiras(id),
-    INDEX idx_transacoes_ativo (ativo_id),
-    INDEX idx_transacoes_carteira (carteira_id),
-    INDEX idx_transacoes_data (data_operacao)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-CREATE TABLE IF NOT EXISTS proventos (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    ativo_id INT NOT NULL,
-    carteira_id INT NOT NULL,
-    tipo ENUM('DIVIDENDO','JCP','RENDIMENTO') NOT NULL DEFAULT 'DIVIDENDO',
-    valor DECIMAL(14,4) NOT NULL,
-    data_pagamento DATE NOT NULL,
-    observacao VARCHAR(255) DEFAULT NULL,
-    criado_em DATETIME DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT fk_proventos_ativo FOREIGN KEY (ativo_id) REFERENCES ativos(id) ON DELETE CASCADE,
-    CONSTRAINT fk_proventos_carteira FOREIGN KEY (carteira_id) REFERENCES carteiras(id),
-    INDEX idx_proventos_ativo (ativo_id),
-    INDEX idx_proventos_carteira (carteira_id),
-    INDEX idx_proventos_data (data_pagamento)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-INSERT INTO carteiras (nome) VALUES
+INSERT OR IGNORE INTO carteiras (nome) VALUES
     ('João'),
     ('Maria');
 
-INSERT INTO ativos (ticker, nome, tipo, setor, cotacao_atual, cotacao_atualizada_em) VALUES
-    ('ABEV3', 'Ambev ON', 'ACAO', 'Bebidas', 13.42, NOW()),
-    ('BBAS3', 'Banco do Brasil ON', 'ACAO', 'Financeiro', 27.85, NOW()),
-    ('BBDC4', 'Bradesco PN', 'ACAO', 'Financeiro', 15.76, NOW()),
-    ('ITUB4', 'Itaú Unibanco PN', 'ACAO', 'Financeiro', 36.18, NOW()),
-    ('LREN3', 'Lojas Renner ON', 'ACAO', 'Varejo', 17.94, NOW()),
-    ('PETR4', 'Petrobras PN', 'ACAO', 'Petróleo e Gás', 38.50, NOW()),
-    ('PRIO3', 'PRIO ON', 'ACAO', 'Petróleo e Gás', 42.31, NOW()),
-    ('RENT3', 'Localiza ON', 'ACAO', 'Aluguel de Veículos', 49.67, NOW()),
-    ('VALE3', 'Vale ON', 'ACAO', 'Mineração', 62.44, NOW()),
-    ('WEGE3', 'WEG ON', 'ACAO', 'Bens Industriais', 41.28, NOW());
+INSERT OR IGNORE INTO ativos (ticker, nome, tipo, setor, cotacao_atual, cotacao_atualizada_em) VALUES
+    ('ABEV3', 'Ambev ON', 'ACAO', 'Bebidas', 13.42, datetime('now', 'localtime')),
+    ('BBAS3', 'Banco do Brasil ON', 'ACAO', 'Financeiro', 27.85, datetime('now', 'localtime')),
+    ('BBDC4', 'Bradesco PN', 'ACAO', 'Financeiro', 15.76, datetime('now', 'localtime')),
+    ('ITUB4', 'Itaú Unibanco PN', 'ACAO', 'Financeiro', 36.18, datetime('now', 'localtime')),
+    ('LREN3', 'Lojas Renner ON', 'ACAO', 'Varejo', 17.94, datetime('now', 'localtime')),
+    ('PETR4', 'Petrobras PN', 'ACAO', 'Petróleo e Gás', 38.50, datetime('now', 'localtime')),
+    ('PRIO3', 'PRIO ON', 'ACAO', 'Petróleo e Gás', 42.31, datetime('now', 'localtime')),
+    ('RENT3', 'Localiza ON', 'ACAO', 'Aluguel de Veículos', 49.67, datetime('now', 'localtime')),
+    ('VALE3', 'Vale ON', 'ACAO', 'Mineração', 62.44, datetime('now', 'localtime')),
+    ('WEGE3', 'WEG ON', 'ACAO', 'Bens Industriais', 41.28, datetime('now', 'localtime'));
 
 -- Dez posições de teste para cada carteira, totalizando vinte operações.
 INSERT INTO transacoes (ativo_id, carteira_id, tipo, quantidade, preco_unitario, taxas, data_operacao, observacao) VALUES

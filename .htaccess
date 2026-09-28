@@ -1,0 +1,12 @@
+Options -Indexes
+
+# Configuração, bancos e scripts internos nunca são servidos pela web.
+<FilesMatch "^\.env|\.(sqlite|sqlite3|db|sql|md)$">
+    Require all denied
+</FilesMatch>
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule "(^|/)\.git" - [F,L]
+    RewriteRule "^(data|database|scripts|scratch|config|models|services|controllers)(/|$)" - [F,L]
+</IfModule>

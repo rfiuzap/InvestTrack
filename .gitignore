@@ -8,8 +8,15 @@ database/install.sql
 database/seed.sql
 database/banco_local.sql
 
+# Bancos SQLite com dados do usuario
+*.sqlite
+*.sqlite3
+
 # Arquivos temporários do editor e do sistema
 .vscode/
 *.log
 Thumbs.db
 .DS_Store
+
+# Banco da demo publicada
+data/
